@@ -6,6 +6,7 @@ import { handleGetObject } from './routes/GetObject';
 import { handleUploadObject } from './routes/UploadObject';
 import { UploadMiddleware } from './middleware/UploadMiddleware';
 import bodyParser from 'body-parser';
+import { CDNWorker } from './CDNWorker';
 require('express-async-errors');
 
 // Load ENV parameters
@@ -21,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/:store/:id', handleGetObject);
 
 // Use session verifier
-// TODO app.use(SessionVerifierMiddleware.handle);
+app.use(SessionVerifierMiddleware.handle);
 
 // Routes
 // ------------------------------------------------
@@ -33,6 +34,7 @@ app.use(ErrorHandlingMiddleware.handle);
  * Main entry point for program.
  */
 async function main() {
+    await CDNWorker.init(process.env.MQ_URL as string);
     await StorageManager.init();
 
     // Listen at the port

@@ -80,9 +80,4 @@ describe('file processor tests', ()=>{
         expect(result.store).toBe('test');
         expect(result.urlPart).toBe(`/test/${objName}`);
     });
-
-    afterAll(async()=>{
-        await fs.promises.rm(BASE_PATH, { recursive: true, force: true });
-        await fs.promises.rm(TEMP_PATH, { recursive: true, force: true });
-    });
 });

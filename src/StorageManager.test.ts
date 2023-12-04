@@ -125,9 +125,4 @@ describe('storage manager tests', ()=>{
 
         throw new Error("File was not deleted.");
     });
-
-    afterAll(async()=>{
-        await fs.promises.rm(BASE_PATH, { recursive: true, force: true });
-        await fs.promises.rm(TEMP_PATH, { recursive: true, force: true });
-    });
 });

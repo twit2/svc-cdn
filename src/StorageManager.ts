@@ -149,6 +149,42 @@ async function deleteTempFile(path: string) {
     }
 }
 
+/**
+ * Asserts the object name.
+ */
+async function assertObjectName(name: string) {
+    const s = name.split('.');
+
+    if(!((s.length === 2) || (/^[0-9]+$/.test(s[0])) || (/^[a-z]+$/i.test(s[1]))))
+        throw APIError.fromCode(APIResponseCodes.INVALID_REQUEST_BODY);
+}
+
+/**
+ * Gets the path of the specified object.
+ * @param store The store to get the object from.
+ * @param objectName The name of the object.
+ * @returns The full object path.
+ */
+async function getObjectPath(store: string, objectName: string) {
+    const ds = getStore(store);
+    
+    if(!ds)
+        throw APIError.fromCode(APIResponseCodes.NOT_FOUND);
+
+    // ensure name is valid
+    assertObjectName(objectName);
+
+    const itemPath = path.join(objectsPath, ds.name, objectName);
+    
+    try {
+        await fs.promises.access(itemPath, fs.constants.F_OK);
+    } catch(e) {
+        throw APIError.fromCode(APIResponseCodes.NOT_FOUND);
+    }
+
+    return itemPath;
+}
+
 export const StorageManager = {
     DEFAULT_UL_SIZE,
     tempPath: ()=>tempPath,
@@ -159,5 +195,6 @@ export const StorageManager = {
     addStore,
     getStore,
     parseStore,
-    placeFile: placeObject
+    placeFile: placeObject,
+    getObjectPath
 }
