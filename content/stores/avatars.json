@@ -1,0 +1,7 @@
+{
+	"name": "avatars",
+	"limits": {
+		"maxUploadSize": 3145728,
+		"allowedTypes": ["image/png", "image/jpeg"]
+	}
+}
