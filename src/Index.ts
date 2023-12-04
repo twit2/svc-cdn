@@ -1,6 +1,7 @@
 import { configDotenv } from 'dotenv';
 import express from 'express';
 import { ErrorHandlingMiddleware, SessionVerifierMiddleware } from '@twit2/std-library';
+import { StorageManager } from './StorageManager';
 require('express-async-errors');
 
 // Load ENV parameters
@@ -25,6 +26,7 @@ app.use(ErrorHandlingMiddleware.handle);
  * Main entry point for program.
  */
 async function main() {
+    await StorageManager.init();
 
     // Listen at the port
     app.listen(port, () => {
