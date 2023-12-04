@@ -1,0 +1,4 @@
+[
+    { "type": "image/png", "extensions": [".png"] },
+    { "type": "image/jpeg", "extensions": [".jpg", ".jpeg"] }
+]

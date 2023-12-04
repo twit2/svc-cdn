@@ -3,5 +3,7 @@ export interface DataStore {
     limits: {
         maxUploadSize?: number;
         allowedTypes: string[];
-    }
+        maxUploadItems: number;
+    },
+    processors?: string[];
 }

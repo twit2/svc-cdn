@@ -2,6 +2,10 @@ import { configDotenv } from 'dotenv';
 import express from 'express';
 import { ErrorHandlingMiddleware, SessionVerifierMiddleware } from '@twit2/std-library';
 import { StorageManager } from './StorageManager';
+import { handleGetObject } from './routes/GetObject';
+import { handleUploadObject } from './routes/UploadObject';
+import { UploadMiddleware } from './middleware/UploadMiddleware';
+import bodyParser from 'body-parser';
 require('express-async-errors');
 
 // Load ENV parameters
@@ -12,13 +16,16 @@ configDotenv();
 const app = express();
 const port = process.env.HTTP_PORT ?? 3400;
 
-app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.get('/:store/:id', handleGetObject);
 
 // Use session verifier
-app.use(SessionVerifierMiddleware.handle);
+// TODO app.use(SessionVerifierMiddleware.handle);
 
 // Routes
 // ------------------------------------------------
+app.post('/:store', UploadMiddleware.handle, handleUploadObject);
 
 app.use(ErrorHandlingMiddleware.handle);
 
