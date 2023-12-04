@@ -2,10 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { DataStore } from './types/DataStore';
 import Ajv from 'ajv';
-import { IntermediateFile } from './types/IntermediateFile';
-import { APIError, APIResponseCodes, generateId } from '@twit2/std-library';
+import { APIError, APIResponseCodes } from '@twit2/std-library';
 import { Mimetype } from './types/Mimetype';
-import { DataObject } from './types/DataObject';
 let mimes : Mimetype[] = [];
 
 const DEFAULT_UL_SIZE = 1024 * 1024; // 1 megabyte
