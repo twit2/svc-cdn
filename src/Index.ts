@@ -7,6 +7,7 @@ import { handleUploadObject } from './routes/UploadObject';
 import { UploadMiddleware } from './middleware/UploadMiddleware';
 import bodyParser from 'body-parser';
 import { CDNWorker } from './CDNWorker';
+import { ProcessorManager } from './ProcessorManager';
 require('express-async-errors');
 
 // Load ENV parameters
@@ -36,6 +37,7 @@ app.use(ErrorHandlingMiddleware.handle);
 async function main() {
     await CDNWorker.init(process.env.MQ_URL as string);
     await StorageManager.init();
+    await ProcessorManager.init();
 
     // Listen at the port
     app.listen(port, () => {

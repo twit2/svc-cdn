@@ -1,0 +1,38 @@
+import { UserAvatarProcessor } from "./processors/UserAvatarProcessor";
+import { Processor } from "./types/Processor";
+
+const processors : Processor[] = [];
+
+/**
+ * Registers all processors.
+ */
+async function init() {
+    registerProcessor(new UserAvatarProcessor());
+}
+
+/**
+ * Registers a new file processor.
+ * @param p The file processor to register..
+ */
+async function registerProcessor(p: Processor) {
+    console.log(`Registering processor '${p.name}'...`);
+    await p.init();
+    processors.push(p);
+}
+
+/**
+ * Gets a processor by name.
+ * @param name The name of the processor to get.
+ */
+async function getProcessor(name: string) {
+    return processors.find(x => x.name == name);
+}
+
+/**
+ * Processor manager - manages all file processors.
+ */
+export const ProcessorManager = {
+    init,
+    registerProcessor,
+    getProcessor
+}
