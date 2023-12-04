@@ -10,3 +10,4 @@ README.md
 coverage
 .gitignore
 *.test.js
+content/objects
