@@ -4,5 +4,6 @@
 		"maxUploadSize": 3145728,
 		"maxUploadItems": 4,
 		"allowedTypes": ["image/png", "image/jpeg"]
-	}
+	},
+	"processors": ["exif-be-gone"]
 }

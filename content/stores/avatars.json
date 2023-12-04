@@ -5,5 +5,5 @@
 		"maxUploadItems": 1,
 		"allowedTypes": ["image/png", "image/jpeg"]
 	},
-	"processors": ["user-avatar-proc"]
+	"processors": ["exif-be-gone", "user-avatar-proc"]
 }
