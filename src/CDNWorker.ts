@@ -18,7 +18,7 @@ async function init(url: string) {
     // Setup user svc rpc
     const userRpc = new MsgQueue.rpc.RPCClient(mq);
     await userRpc.init('t2-user-service');
-    UserAvatarProcessor.setRPCClient(rpcc);
+    UserAvatarProcessor.setRPCClient(userRpc);
 }
 
 export const CDNWorker = {

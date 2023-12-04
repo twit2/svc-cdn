@@ -5,4 +5,5 @@ export interface WithUploadState {
 export interface UploadState {
     targetId: string;
     mimetype: string;
+    actingUserId: string;
 };

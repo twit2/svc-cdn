@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { StorageManager } from "../StorageManager";
-import { APIError, APIResponseCodes, generateId } from "@twit2/std-library";
+import { APIError, APIResponseCodes, WithT2Session, generateId } from "@twit2/std-library";
 import { StoreUploader } from "../types/StoreUploader";
 import multer from "multer";
 import { DataStore } from "../types/DataStore";
@@ -36,8 +36,10 @@ function createMulterStorageHandler() {
 
             (file as any).uploadState = {
                 targetId,
-                mimetype: file.mimetype
+                mimetype: file.mimetype,
+                actingUserId: (req as (Request & WithT2Session)).session.id
             }
+            
             cb(null, path.basename(tempPath));
         }
     });

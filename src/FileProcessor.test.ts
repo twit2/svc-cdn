@@ -74,7 +74,7 @@ describe('file processor tests', ()=>{
         const objName = StorageManager.createObjectName(tempId, 'image/png');
         await fs.promises.writeFile(path.join(TEMP_PATH, objName), 'test');
 
-        const result = await FileProcessor.process(ds, { targetId: tempId, mimetype: 'image/png' });
+        const result = await FileProcessor.process(ds, { targetId: tempId, mimetype: 'image/png', actingUserId: "0000000000" });
         expect(result.id).toBe(tempId);
         expect(result.name).toBe(objName);
         expect(result.store).toBe('test');
