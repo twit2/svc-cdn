@@ -2,6 +2,7 @@ import path from "path";
 import { ExifBeGoneProcessor } from "./processors/ExifBeGoneProcessor";
 import { UserAvatarProcessor } from "./processors/UserAvatarProcessor";
 import { Processor } from "./types/Processor";
+import { UserBannerProcessor } from "./processors/UserBannerProcessor";
 
 const processors : Processor[] = [];
 
@@ -10,6 +11,7 @@ const processors : Processor[] = [];
  */
 async function init() {
     registerProcessor(new UserAvatarProcessor());
+    registerProcessor(new UserBannerProcessor());
     registerProcessor(new ExifBeGoneProcessor(path.join(process.cwd(), "content", "temp", "exif")));
 }
 

@@ -1,6 +1,7 @@
 import { RabbitMQQueueProvider } from "@twit2/std-library/dist/comm/providers/RabbitMqProvider"
 import { MsgQueue, SessionVerifierMiddleware } from "@twit2/std-library";
 import { UserAvatarProcessor } from "./processors/UserAvatarProcessor";
+import { UserBannerProcessor } from "./processors/UserBannerProcessor";
 
 /**
  * Initializes the worker.
@@ -19,6 +20,7 @@ async function init(url: string) {
     const userRpc = new MsgQueue.rpc.RPCClient(mq);
     await userRpc.init('t2-user-service');
     UserAvatarProcessor.setRPCClient(userRpc);
+    UserBannerProcessor.setRPCClient(userRpc);
 }
 
 export const CDNWorker = {
