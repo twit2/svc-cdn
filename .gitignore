@@ -10,6 +10,7 @@
 
 # Ignore git strip
 /__gitstrip
+/coverage
 
 # Ignore stored content
 /content/objects/*
